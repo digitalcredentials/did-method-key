@@ -1,8 +1,12 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var DidKeyDriver = require('./DidKeyDriver.js');
+
 /*!
  * Copyright (c) 2021 Digital Bazaar, Inc. All rights reserved.
  */
-
-import {DidKeyDriver} from './DidKeyDriver.js';
 
 /**
  * Helper method to match the `.driver()` API of other `did-io` plugins.
@@ -17,4 +21,5 @@ function driver({verificationSuite} = {}) {
   return new DidKeyDriver({verificationSuite});
 }
 
-export {driver, DidKeyDriver};
+exports.DidKeyDriver = DidKeyDriver.DidKeyDriver;
+exports.driver = driver;
