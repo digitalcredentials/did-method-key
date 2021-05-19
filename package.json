@@ -1,20 +1,11 @@
 {
-  "name": "@digitalbazaar/did-method-key",
-  "version": "2.0.1-0",
+  "name": "@digitalcredentials/did-method-key",
+  "version": "1.0.0",
   "description": "A did:key method resolver.",
-  "homepage": "http://github.com/digitalbazaar/did-method-key-js",
-  "author": {
-    "name": "Digital Bazaar, Inc.",
-    "email": "support@digitalbazaar.com",
-    "url": "https://digitalbazaar.com/"
-  },
+  "homepage": "http://github.com/digitalcredentials/did-method-key-js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/digitalbazaar/did-method-key-js"
-  },
-  "bugs": {
-    "url": "https://github.com/digitalbazaar/did-method-key-js/issues",
-    "email": "support@digitalbazaar.com"
+    "url": "https://github.com/digitalcredentials/did-method-key-js"
   },
   "license": "BSD-3-Clause",
   "files": [
@@ -93,7 +84,7 @@
     "clear": "rimraf dist/ && mkdir dist",
     "prepare": "npm run build",
     "rebuild": "npm run clear && npm run build",
-    "test": "npm run lint && npm run test-node && npm run test-karma",
+    "test": "npm run test-node && npm run test-karma",
     "test-node": "cross-env NODE_ENV=test mocha -r esm --preserve-symlinks -t 10000 test/*.spec.js",
     "test-karma": "karma start karma.conf.js",
     "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary npm run test-node",

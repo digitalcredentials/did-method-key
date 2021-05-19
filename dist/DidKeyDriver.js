@@ -2,12 +2,12 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var ed25519VerificationKey2020 = require('@digitalbazaar/ed25519-verification-key-2020');
-var x25519KeyAgreementKey2020 = require('@digitalbazaar/x25519-key-agreement-key-2020');
-var didContext = require('did-context');
-var didIo = require('@digitalbazaar/did-io');
+var ed25519VerificationKey2020 = require('@digitalcredentials/ed25519-verification-key-2020');
+var x25519KeyAgreementKey2020 = require('@digitalcredentials/x25519-key-agreement-key-2020');
+var didContext = require('@digitalcredentials/did-context');
+var didIo = require('@digitalcredentials/did-io');
 var ed25519Context = require('ed25519-signature-2020-context');
-var x25519Context = require('x25519-key-agreement-2020-context');
+var x25519Context = require('@digitalcredentials/x25519-key-agreement-2020-context');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
