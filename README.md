@@ -1,8 +1,6 @@
-# did:key method driver _(@digitalbazaar/did-method-key)_
+# did:key method driver _(@digitalcredentials/did-method-key)_
 
-[![Node.js CI](https://github.com/digitalbazaar/did-method-key-js/workflows/Node.js%20CI/badge.svg)](https://github.com/digitalbazaar/did-method-key-js/actions?query=workflow%3A%22Node.js+CI%22)
-[![Coverage status](https://img.shields.io/codecov/c/github/digitalbazaar/did-method-key-js)](https://codecov.io/gh/digitalbazaar/did-method-key-js)
-[![NPM Version](https://img.shields.io/npm/v/@digitalbazaar/did-method-key)](https://www.npmjs.com/package/@digitalbazaar/did-method-key)
+[![NPM Version](https://img.shields.io/npm/v/@digitalcredentials/did-method-key)](https://www.npmjs.com/package/@digitalcredentials/did-method-key)
 
 > A [DID](https://w3c.github.io/did-core) (Decentralized Identifier) method driver for the `did-io` library and for standalone use
 
@@ -18,6 +16,9 @@
 - [License](#license)
 
 ## Background
+
+(Forked from [`digitalbazaar/did-method-key` v1.0.0](https://github.com/digitalbazaar/did-method-key-js)
+to provide TypeScript compatibility.)
 
 See also (related specs):
 
@@ -98,13 +99,13 @@ Requires Node.js 12+
 To install from `npm`:
 
 ```
-npm install --save @digitalbazaar/did-method-key
+npm install --save @digitalcredentials/did-method-key
 ```
 
 To install locally (for development):
 
 ```
-git clone https://github.com/digitalbazaar/did-method-key-js.git
+git clone https://github.com/digitalcredentials/did-method-key-js.git
 cd did-method-key-js
 npm install
 ```
@@ -116,7 +117,7 @@ npm install
 To generate a new key and get its corresponding `did:key` method DID Document:
 
 ```js
-const didKeyDriver = require('@digitalbazaar/did-method-key').driver();
+const didKeyDriver = require('@digitalcredentials/did-method-key').driver();
 
 // generate did:key using Ed25519 key type by default
 const {didDocument, keyPairs, methodFor} = await didKeyDriver.generate();
@@ -147,7 +148,7 @@ Map(2) {
 instance for a given purpose. For example, a verification key (containing a
 `signer()` and `verifier()` functions) are frequently useful for
 [`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) or
-[`vc-js`](https://github.com/digitalbazaar/vc-js) operations. After generating
+[`vc-js`](https://github.com/digitalcredentials/vc-js) operations. After generating
 a new did:key DID, you can do:
 
 ```js
@@ -257,7 +258,7 @@ you can customize the driver as follows.
 import {
   Ed25519VerificationKey2018
 } from '@digitalbazaar/ed25519-verification-key-2018';
-import * as didKey from '@digitalbazaar/did-method-key';
+import * as didKey from '@digitalcredentials/did-method-key';
 
 const didKeyDriver2018 = didKey.driver({
  verificationSuite: Ed25519VerificationKey2018
@@ -298,11 +299,7 @@ PRs accepted.
 If editing the Readme, please conform to the
 [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
 
-## Commercial Support
-
-Commercial support for this library is available upon request from
-Digital Bazaar: support@digitalbazaar.com
-
 ## License
 
-[New BSD License (3-clause)](LICENSE) © Digital Bazaar
+* MIT License - DCC - TypeScript compatibility.
+* New BSD License (3-clause) © 2020-2021 Digital Bazaar - Initial implementation.
