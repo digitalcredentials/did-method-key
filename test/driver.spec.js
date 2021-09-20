@@ -6,7 +6,7 @@ chai.should();
 const {expect} = chai;
 
 import {Ed25519VerificationKey2020} from
-  '@digitalbazaar/ed25519-verification-key-2020';
+  '@digitalcredentials/ed25519-verification-key-2020';
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
 import {driver} from '../';
