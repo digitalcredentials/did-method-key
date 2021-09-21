@@ -27,12 +27,10 @@
   },
   "dependencies": {
     "@digitalbazaar/did-io": "digitalbazaar/did-io#noesm",
-    "@digitalbazaar/x25519-key-agreement-key-2019": "^5.1.1",
-    "@digitalcredentials/ed25519-verification-key-2020": "^3.0.1",
+    "@digitalcredentials/ed25519-verification-key-2020": "^3.1.2",
     "@digitalcredentials/x25519-key-agreement-key-2020": "^2.0.2"
   },
   "devDependencies": {
-    "@digitalbazaar/ed25519-verification-key-2018": "^3.1.1",
     "chai": "^4.3.4",
     "cross-env": "^7.0.3",
     "eslint": "^7.22.0",

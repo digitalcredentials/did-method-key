@@ -7,8 +7,6 @@ const {expect} = chai;
 
 import {Ed25519VerificationKey2020} from
   '@digitalcredentials/ed25519-verification-key-2020';
-import {Ed25519VerificationKey2018} from
-  '@digitalbazaar/ed25519-verification-key-2018';
 import {driver} from '../';
 
 const didKeyDriver = driver();
@@ -49,62 +47,6 @@ describe('did:key method driver', () => {
         .equal('z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW');
     });
 
-    it('should get the DID Doc in 2018 mode', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
-      });
-      // Note: Testing same keys as previous (2020 mode) test
-      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const didDocument = await didKeyDriver2018.get({did});
-
-      const expectedDidDoc = {
-        '@context': [
-          'https://www.w3.org/ns/did/v1',
-          'https://w3id.org/security/suites/ed25519-2018/v1',
-          'https://w3id.org/security/suites/x25519-2019/v1'
-        ],
-        id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-        verificationMethod: [
-          {
-            id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-              '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-            type: 'Ed25519VerificationKey2018',
-            controller:
-              'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-            publicKeyBase58: 'B12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u'
-          }
-        ],
-        authentication: [
-          'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-          '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-        ],
-        assertionMethod: [
-          'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-            '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-        ],
-        capabilityDelegation: [
-          'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-            '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-        ],
-        capabilityInvocation: [
-          'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-            '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-        ],
-        keyAgreement: [
-          {
-            id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-                '#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc',
-            type: 'X25519KeyAgreementKey2019',
-            controller:
-              'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-            publicKeyBase58: 'JhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr'
-          }
-        ]
-      };
-
-      expect(didDocument).to.eql(expectedDidDoc);
-    });
-
     it('should resolve an individual key within the DID Doc', async () => {
       const did = 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
       const keyId = did + '#z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
@@ -117,24 +59,6 @@ describe('did:key method driver', () => {
         type: 'Ed25519VerificationKey2020',
         controller: 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T',
         publicKeyMultibase: 'z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T'
-      });
-    });
-
-    it('should resolve an individual key in 2018 mode', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
-      });
-      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const keyId = did + '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const key = await didKeyDriver2018.get({did: keyId});
-
-      expect(key).to.eql({
-        '@context': 'https://w3id.org/security/suites/ed25519-2018/v1',
-        id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-          '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-        type: 'Ed25519VerificationKey2018',
-        controller: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-        publicKeyBase58: 'B12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u'
       });
     });
 
@@ -151,25 +75,6 @@ describe('did:key method driver', () => {
         type: 'X25519KeyAgreementKey2020',
         controller: 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T',
         publicKeyMultibase: 'z6LSotGbgPCJD2Y6TSvvgxERLTfVZxCh9KSrez3WNrNp7vKW'
-      });
-    });
-
-    it('should resolve an individual key agreement key (2018)', async () => {
-      const didKeyDriver2018 = driver({
-        verificationSuite: Ed25519VerificationKey2018
-      });
-      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const kakKeyId =
-        `${did}#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc`;
-      const key = await didKeyDriver2018.get({did: kakKeyId});
-
-      expect(key).to.eql({
-        '@context': 'https://w3id.org/security/suites/x25519-2019/v1',
-        id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-          '#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc',
-        type: 'X25519KeyAgreementKey2019',
-        controller: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-        publicKeyBase58: 'JhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr'
       });
     });
   });
