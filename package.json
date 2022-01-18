@@ -26,7 +26,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@digitalbazaar/did-io": "digitalbazaar/did-io#noesm",
+    "@digitalcredentials/did-io": "^1.0.2",
     "@digitalcredentials/ed25519-verification-key-2020": "^3.1.2",
     "@digitalcredentials/x25519-key-agreement-key-2020": "^2.0.2"
   },
