@@ -1,5 +1,11 @@
 # did:key driver ChangeLog
 
+## 2.0.3 - 2022-01-18
+
+### Changed
+- Change `@digitalbazaar/did-io` to `@digitalcredentials/did-io` (the github
+  dependency was causing problems in Docker, downstream).
+
 ## 2.0.0 - 2021-06-19
 
 ### Changed
