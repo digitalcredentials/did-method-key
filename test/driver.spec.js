@@ -14,7 +14,7 @@ import {
 } from '@digitalbazaar/x25519-key-agreement-key-2019';
 import {
   X25519KeyAgreementKey2020
-} from '@digitalbazaar/x25519-key-agreement-key-2020';
+} from '@digitalcredentials/x25519-key-agreement-key-2020';
 
 chai.should();
 const {expect} = chai;
