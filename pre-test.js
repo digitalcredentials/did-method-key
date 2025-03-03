@@ -1,4 +1,4 @@
-import PackageJson from '@npmcli/package-json';
+const PackageJson = require('@npmcli/package-json');
 
 // pre-test script
 const main = async () => {
