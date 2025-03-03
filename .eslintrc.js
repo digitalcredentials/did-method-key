@@ -16,7 +16,7 @@ module.exports = {
     // this is required for dynamic import()
     ecmaVersion: 2020
   },
-  ignorePatterns: ['node_modules', 'dist', '.eslintrc.js', 'karma.conf.js'],
+  ignorePatterns: ['node_modules', 'dist', '.eslintrc.js', 'karma.conf.js', 'pre-test.js'],
   rules: {
     'jsdoc/check-examples': 0
   }
