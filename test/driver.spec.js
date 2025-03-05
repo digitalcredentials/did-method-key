@@ -3,15 +3,10 @@
  */
 import * as Bls12381Multikey from '@digitalbazaar/bls12-381-multikey';
 import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
-import {createFromMultibase, driver} from '../lib/index.js';
+import {driver} from '../lib/index.js';
 import chai from 'chai';
-import {Ed25519VerificationKey2018} from
-  '@digitalbazaar/ed25519-verification-key-2018';
 import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
-import {
-  X25519KeyAgreementKey2019
-} from '@digitalbazaar/x25519-key-agreement-key-2019';
 import {
   X25519KeyAgreementKey2020
 } from '@digitalcredentials/x25519-key-agreement-key-2020';
@@ -151,67 +146,6 @@ describe('did:key method driver', () => {
         .equal('z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc');
     });
 
-    it('should get the DID Doc in 2018 mode', async () => {
-      const didKeyDriver2018 = driver();
-      const multibaseMultikeyHeaders = ['z6Mk'];
-      for(const header of multibaseMultikeyHeaders) {
-        didKeyDriver2018.use({
-          multibaseMultikeyHeader: header,
-          fromMultibase: createFromMultibase(Ed25519VerificationKey2018)
-        });
-      }
-      // Note: Testing same keys as previous (2020 mode) test
-      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const didDocument = await didKeyDriver2018.get({did});
-
-      const expectedDidDoc = {
-        '@context': [
-          'https://www.w3.org/ns/did/v1',
-          'https://w3id.org/security/suites/ed25519-2018/v1',
-          'https://w3id.org/security/suites/x25519-2019/v1'
-        ],
-        id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-        verificationMethod: [
-          {
-            id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-              '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-            type: 'Ed25519VerificationKey2018',
-            controller:
-              'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-            publicKeyBase58: 'B12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u'
-          }
-        ],
-        authentication: [
-          'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-          '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-        ],
-        assertionMethod: [
-          'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-            '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-        ],
-        capabilityDelegation: [
-          'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-            '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-        ],
-        capabilityInvocation: [
-          'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-            '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH'
-        ],
-        keyAgreement: [
-          {
-            id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-                '#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc',
-            type: 'X25519KeyAgreementKey2019',
-            controller:
-              'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-            publicKeyBase58: 'JhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr'
-          }
-        ]
-      };
-
-      expect(didDocument).to.eql(expectedDidDoc);
-    });
-
     it('should resolve an individual key within the DID Doc', async () => {
       const did = 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
       const keyId = did + '#z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T';
@@ -224,29 +158,6 @@ describe('did:key method driver', () => {
         type: 'Ed25519VerificationKey2020',
         controller: 'did:key:z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T',
         publicKeyMultibase: 'z6MknCCLeeHBUaHu4aHSVLDCYQW9gjVJ7a63FpMvtuVMy53T'
-      });
-    });
-
-    it('should resolve an individual key in 2018 mode', async () => {
-      const didKeyDriver2018 = driver();
-
-      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const publicKeyMultibase =
-        'z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const keyId = `${did}#${publicKeyMultibase}`;
-      didKeyDriver2018.use({
-        multibaseMultikeyHeader: 'z6Mk',
-        fromMultibase: createFromMultibase(Ed25519VerificationKey2018)
-      });
-      const key = await didKeyDriver2018.get({did: keyId});
-
-      expect(key).to.eql({
-        '@context': 'https://w3id.org/security/suites/ed25519-2018/v1',
-        id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-          '#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-        type: 'Ed25519VerificationKey2018',
-        controller: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-        publicKeyBase58: 'B12NYF8RrR3h41TDCTJojY59usg3mbtbjnFs7Eud1Y6u'
       });
     });
 
@@ -307,28 +218,6 @@ describe('did:key method driver', () => {
         type: 'Multikey',
         controller: 'did:key:zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR',
         publicKeyMultibase: 'zDnaeucDGfhXHoJVqot3p21RuupNJ2fZrs8Lb1GV83VnSo2jR'
-      });
-    });
-
-    it('should resolve an individual key agreement key (2018)', async () => {
-      const didKeyDriver2018 = driver();
-      const did = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
-      const publicKeyMultibase =
-        'z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc';
-      const kakKeyId = `${did}#${publicKeyMultibase}`;
-      didKeyDriver2018.use({
-        multibaseMultikeyHeader: 'z6Mk',
-        fromMultibase: createFromMultibase(Ed25519VerificationKey2018)
-      });
-      const key = await didKeyDriver2018.get({did: kakKeyId});
-
-      expect(key).to.eql({
-        '@context': 'https://w3id.org/security/suites/x25519-2019/v1',
-        id: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' +
-          '#z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc',
-        type: 'X25519KeyAgreementKey2019',
-        controller: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
-        publicKeyBase58: 'JhNWeSVLMYccCk7iopQW4guaSJTojqpMEELgSLhKwRr'
       });
     });
   });
@@ -511,27 +400,6 @@ describe('did:key method driver', () => {
       expect(didDocument).to.exist;
       expect(didDocument).to.have.property('@context');
       expect(didDocument.id).to.equal(`did:key:${keyPair.fingerprint()}`);
-    });
-    it('should convert a 2019 X25519-based key to a did doc', async () => {
-      const didKeyDriver = driver();
-      didKeyDriver.use({
-        multibaseMultikeyHeader: 'z6LS',
-        fromMultibase: X25519KeyAgreementKey2019.from
-      });
-      const keyPair = await X25519KeyAgreementKey2019.generate();
-      const {didDocument} = await didKeyDriver.publicKeyToDidDoc({
-        publicKeyDescription: keyPair
-      });
-      expect(didDocument).to.exist;
-      expect(didDocument).to.have.property('@context');
-      expect(didDocument.id).to.equal(`did:key:${keyPair.fingerprint()}`);
-      expect(didDocument['@context']).to.eql([
-        'https://www.w3.org/ns/did/v1',
-        'https://w3id.org/security/suites/x25519-2019/v1'
-      ]);
-      const [publicKey] = didDocument.keyAgreement;
-      expect(publicKey.type).to.equal('X25519KeyAgreementKey2019');
-      expect(publicKey.controller).to.equal(`did:key:${keyPair.fingerprint()}`);
     });
     it('should convert a 2020 X25519-based key to a did doc', async () => {
       const didKeyDriver = driver();
