@@ -1,6 +1,6 @@
 {
   "name": "@digitalcredentials/did-method-key",
-  "version": "2.0.4-0",
+  "version": "3.0.0-beta.1",
   "description": "A did:key method resolver.",
   "homepage": "http://github.com/digitalcredentials/did-method-key",
   "repository": {
@@ -8,23 +8,11 @@
     "url": "https://github.com/digitalcredentials/did-method-key"
   },
   "license": "BSD-3-Clause",
+  "type": "module",
+  "exports": "./lib/index.js",
   "files": [
-    "dist",
-    "lib",
-    "rollup.config.js",
-    "build-dist.sh",
-    "README.md",
-    "LICENSE"
+    "lib/**/*.js"
   ],
-  "main": "dist/index.js",
-  "module": "dist/esm/index.js",
-  "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/esm/index.js"
-    },
-    "./package.json": "./package.json"
-  },
   "dependencies": {
     "@digitalcredentials/did-io": "^1.0.2",
     "@digitalcredentials/x25519-key-agreement-key-2020": "^2.0.2"
@@ -77,17 +65,9 @@
     "DID"
   ],
   "scripts": {
-    "rollup": "rollup -c rollup.config.js",
-    "build": "npm run clear && npm run rollup && ./build-dist.sh",
-    "clear": "rimraf dist/ && mkdir dist",
-    "prepare": "npm run build",
-    "posttest": "node post-test.js",
-    "pretest": "node pre-test.js",
-    "prepack": "npm run build",
-    "rebuild": "npm run clear && npm run build",
     "test": "npm run test-node",
     "test-node": "cross-env NODE_ENV=test mocha --preserve-symlinks -t 10000 test/*.spec.js",
-    "test-karma": "karma start karma.conf.js",
+    "test-karma": "karma start karma.conf.cjs",
     "coverage": "cross-env NODE_ENV=test c8 npm run test-node",
     "coverage-ci": "cross-env NODE_ENV=test c8 --reporter=lcovonly --reporter=text-summary --reporter=text npm run test-node",
     "coverage-report": "c8 report",
