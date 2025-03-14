@@ -3,8 +3,8 @@
  */
 import * as Bls12381Multikey from '@digitalbazaar/bls12-381-multikey';
 import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
-import {driver} from '../lib/index.js';
 import chai from 'chai';
+import {driver} from '../lib/index.js';
 import {Ed25519VerificationKey2020} from
   '@digitalbazaar/ed25519-verification-key-2020';
 import {

@@ -12,11 +12,7 @@ module.exports = {
     node: true,
     browser: true
   },
-  parserOptions: {
-    // this is required for dynamic import()
-    ecmaVersion: 2020
-  },
-  ignorePatterns: ['node_modules', 'dist', '.eslintrc.js', 'karma.conf.js', 'pre-test.js'],
+  ignorePatterns: ['node_modules/'],
   rules: {
     'jsdoc/check-examples': 0
   }

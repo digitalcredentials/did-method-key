@@ -29,7 +29,7 @@ module.exports = function(config) {
       //mode: 'production',
       mode: 'development',
       devtool: 'inline-source-map',
-      node: false,
+      //node: false,
       resolve: {
         fallback: {
           url: false,
