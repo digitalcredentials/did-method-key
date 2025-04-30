@@ -1,5 +1,12 @@
 # did:key driver ChangeLog
 
+## 3.0.0 - 2025-04-30
+
+### Changed
+- Update from forked digitalbazaar
+- **BREAKING**: remove cjs build
+- **BREAKING**: remove backwards compatibility with 2018 and 2019 suites
+
 ## 2.0.3 - 2022-01-18
 
 ### Changed
